@@ -1,0 +1,112 @@
+﻿@model ProjectKoelkast.Models.Recipes
+
+@{
+    ViewBag.Title = "Get_Recipe";
+}
+
+    
+
+<div>
+    
+    <hr />
+    <dl class="dl-horizontal">
+        <dd>
+
+            @{
+                //checks if there is an image with product
+                if (Model.ImageUrl == null)
+                {
+                    //if there is no image it shows stock image
+                    <img src="../images/NoImage.png" width="100px" />
+                }
+
+                else
+                {
+                    //if there is a image it shows that image
+                    String img64 = Convert.ToBase64String(Model.ImageUrl);
+                    String img64Url = string.Format("data:image/" + Model.ImageUrl + ";base64,{0}", img64); //imagetype can be e.g. gif, jpeg, png etc.
+                    <img src="@img64Url" width="100px" />
+                }
+            }
+        </dd>
+    </dl>
+    <dl class="dl-horizontal">
+
+        <dd>
+            <h2>@Html.DisplayFor(model => model.Naam)</h2>
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Beschrijving)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Beschrijving)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Keuken)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Keuken)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Gang)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Gang)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AantalPersonen)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AantalPersonen)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Tijd)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tijd)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Voedingswaarden)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Voedingswaarden)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Product.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Product.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Bereidwijze)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Bereidwijze)
+        </dd>
+        <dd>
+            <a href="@Url.Action("Buy", "Cart", new { id = Model.ProductId })">Buy Now</a>
+        </dd>
+    </dl>
+</div>
+
+<br />
+<br />
+<p>
+    @Html.ActionLink("Back to List", "Recipes")
+</p>

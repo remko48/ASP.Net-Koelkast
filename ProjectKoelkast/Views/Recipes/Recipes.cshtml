@@ -1,0 +1,46 @@
+﻿@model IEnumerable<ProjectKoelkast.Models.Recipes>
+
+<p>
+    <br />
+</p>
+
+<h2>Recepten</h2>
+@if (User.Identity.IsAuthenticated)
+{
+    <p>
+        @Html.ActionLink("New Recept", "Add_Recipes")
+    </p>
+}
+
+<dl class="horizontal ">
+    @foreach (var item in Model)
+    {
+
+        <dd>@Html.DisplayFor(modelItem => item.Naam)</dd>
+        <dd>
+            @{
+                 //checks if there is an image with product 
+                if (item.ImageUrl == null)
+                {
+                    //if there is no image it shows stock image with an action to go to the recipes
+                    <a href='@Url.Action("Get_Recipe", new { id = item.Id })'><img src="../images/NoImage.png" width="100px" /></a>
+                }
+
+                else
+                {
+                    //if there is a image it shows that image with an action to go to the recipes
+                    String img64 = Convert.ToBase64String(item.ImageUrl);
+                    String img64Url = string.Format("data:image/" + item.ImageUrl + ";base64,{0}", img64); //imagetype can be e.g. gif, jpeg, png etc.
+                    <a href='@Url.Action("Get_Recipe", new { id = item.Id })'><img src="@img64Url" width="100px" /></a>
+                }
+            }
+
+        </dd>
+
+        <dd>
+
+            <br />
+        </dd>
+    }
+
+</dl>
